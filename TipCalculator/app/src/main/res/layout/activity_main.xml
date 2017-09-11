@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.kevin.tipcalculator.MainActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:animateLayoutChanges="true">
+
+    <EditText
+        android:id="@+id/et_amount"
+        android:layout_width="250dp"
+        android:gravity="center_horizontal"
+        android:hint="@string/please_enter_meal_amount"
+        android:layout_marginBottom="15dp"
+        android:digits="0123456789."
+        android:inputType="numberDecimal"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_hint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/service"/>
+
+    <SeekBar
+        android:id="@+id/sb_rating"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        tools:layout_editor_absoluteY="0dp"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <Button
+        android:id="@+id/btn_enter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/btnEnter" />
+
+    <TextView
+        android:id="@+id/tv_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/meal_amount"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteY="26dp"
+        tools:layout_editor_absoluteX="8dp" />
+
+</LinearLayout>
+
+
