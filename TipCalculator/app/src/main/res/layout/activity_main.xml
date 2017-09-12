@@ -47,6 +47,12 @@
         android:textSize="20sp"
         tools:layout_editor_absoluteY="26dp"
         tools:layout_editor_absoluteX="8dp" />
+    <TextView
+        android:id="@+id/tv_finalA"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textSize="20sp"/>
 
 </LinearLayout>
 

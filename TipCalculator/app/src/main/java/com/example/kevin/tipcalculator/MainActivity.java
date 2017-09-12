@@ -23,8 +23,10 @@ public class MainActivity extends AppCompatActivity {
     private TextView _amountNotice;
     private SeekBar _rating;
     private TextView _serviceTitle;
-    private TextView _finalAmount;
+    private TextView _tipAmount;
     private Button _button;
+    private TextView _finalAmount;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,24 +34,26 @@ public class MainActivity extends AppCompatActivity {
         this._amount = (EditText) findViewById(R.id.et_amount);
         this._rating = (SeekBar) findViewById(R.id.sb_rating);
         this._serviceTitle = (TextView) findViewById(R.id.tv_hint);
-        this._finalAmount = (TextView) findViewById(R.id.tv_label);
+        this._tipAmount = (TextView) findViewById(R.id.tv_label);
         this._button = (Button) findViewById(R.id.btn_enter);
+        this._finalAmount = (TextView) findViewById(R.id.tv_finalA);
+
 
 
         this._rating.setVisibility(View.GONE);
         this._serviceTitle.setVisibility(View.GONE);
-        this._finalAmount.setVisibility(View.GONE);
+        this._tipAmount.setVisibility(View.GONE);
         this._button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String _check = _amount.getText().toString();
                 if (_check.matches("")) {
-                    Toast.makeText(MainActivity.this,"Please Enter a Number",Toast.LENGTH_LONG).show();
+                    Toast.makeText(MainActivity.this,"Please Enter a Number",Toast.LENGTH_SHORT).show();
                 }else{
                     _button.setVisibility(View.GONE);
                     _rating.setVisibility(View.VISIBLE);
                     _serviceTitle.setVisibility(View.VISIBLE);
-                    _finalAmount.setVisibility(View.VISIBLE);
+                    _tipAmount.setVisibility(View.VISIBLE);
                     _rating.setMax(10);
 
 
@@ -79,64 +83,52 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                             String temp = _amount.getText().toString();
-                            double tempAmount = Double.parseDouble(temp);
-                            double tipAmount;
-                            NumberFormat formatter = NumberFormat.getCurrencyInstance();
-                            String roundedAmount;
+                            Toast T = Toast.makeText(MainActivity.this,"Please Enter a Number",Toast.LENGTH_SHORT);
                             _serviceTitle.setText("Selected Rating: " + progress + "/" + _rating.getMax());
-                            if (progress <= 3) {
-                                tipAmount = tempAmount * 0.1;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 3 && progress <= 5) {
-                                tipAmount = tempAmount * 0.13;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 5 && progress <= 7) {
-                                tipAmount = tempAmount * 0.15;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 7 && progress <= 9) {
-                                tipAmount = tempAmount * 0.2;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else {
-                                tipAmount = tempAmount * 0.25;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
+                            if(temp.isEmpty()){
+
+                                T.show();
+
+
+                            }
+                            else{
+                                T.cancel();
+                                double tempAmount = Double.parseDouble(temp);
+                                double tipAmount;
+                                /*NumberFormat formatter = NumberFormat.getCurrencyInstance();
+                                String roundedAmount;*/
+                                if (progress <= 3) {
+                                    tipAmount = tempAmount * 0.1;
+                                    //roundedAmount = formatter.format(tipAmount);
+                                    _tipAmount.setText("Tip Amount: " + String.format("%.2f",tipAmount));
+                                    _finalAmount.setText("Total Amount: " + String.format("%.2f",tipAmount+tempAmount));
+                                } else if (progress > 3 && progress <= 5) {
+                                    tipAmount = tempAmount * 0.13;
+                                    //roundedAmount = formatter.format(tipAmount);
+                                    _tipAmount.setText("Tip Amount: " + String.format("%.2f",tipAmount));
+                                    _finalAmount.setText("Total Amount: " + String.format("%.2f",tipAmount+tempAmount));
+                                } else if (progress > 5 && progress <= 7) {
+                                    tipAmount = tempAmount * 0.15;
+                                    //roundedAmount = formatter.format(tipAmount);
+                                    _tipAmount.setText("Tip Amount: " + String.format("%.2f",tipAmount));
+                                    _finalAmount.setText("Total Amount: " + String.format("%.2f",tipAmount+tempAmount));
+                                } else if (progress > 7 && progress <= 9) {
+                                    tipAmount = tempAmount * 0.2;
+                                    //roundedAmount = formatter.format(tipAmount);
+                                    _tipAmount.setText("Tip Amount: " + String.format("%.2f",tipAmount));
+                                    _finalAmount.setText("Total Amount: " + String.format("%.2f",tipAmount+tempAmount));
+                                } else {
+                                    tipAmount = tempAmount * 0.25;
+                                    //roundedAmount = formatter.format(tipAmount);
+                                    _tipAmount.setText("Tip Amount: " + String.format("%.2f",tipAmount));
+                                    _finalAmount.setText("Total Amount: " + String.format("%.2f",tipAmount+tempAmount));
+                                }
                             }
                         }
 
                         @Override
                         public void onStartTrackingTouch(SeekBar seekBar) {
-                            String temp = _amount.getText().toString();
-                            double tempAmount = Double.parseDouble(temp);
-                            double tipAmount;
-                            NumberFormat formatter = NumberFormat.getCurrencyInstance();
-                            String roundedAmount;
-                            int progress = seekBar.getProgress();
-                            _serviceTitle.setText("Selected Rating: " + progress + "/" + _rating.getMax());
-                            if (progress <= 3) {
-                                tipAmount = tempAmount * 0.1;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 3 && progress <= 5) {
-                                tipAmount = tempAmount * 0.13;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 5 && progress <= 7) {
-                                tipAmount = tempAmount * 0.15;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else if (progress > 7 && progress <= 9) {
-                                tipAmount = tempAmount * 0.2;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            } else {
-                                tipAmount = tempAmount * 0.25;
-                                roundedAmount = formatter.format(tipAmount);
-                                _finalAmount.setText("Final Amount: " + roundedAmount);
-                            }
+
                         }
 
                         @Override
