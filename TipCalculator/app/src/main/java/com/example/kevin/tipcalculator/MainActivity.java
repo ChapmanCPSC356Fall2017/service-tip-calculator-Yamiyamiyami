@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView _tipAmount;
     private Button _button;
     private TextView _finalAmount;
-
+//creating variables for reference from xml to java
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,25 +38,25 @@ public class MainActivity extends AppCompatActivity {
         this._button = (Button) findViewById(R.id.btn_enter);
         this._finalAmount = (TextView) findViewById(R.id.tv_finalA);
 
-
+//references are made and visibility of widgets are set
 
         this._rating.setVisibility(View.GONE);
         this._serviceTitle.setVisibility(View.GONE);
         this._tipAmount.setVisibility(View.GONE);
         this._button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v) {//hides and shows other UI after button is clicked
                 String _check = _amount.getText().toString();
-                if (_check.matches("")) {
+                if (_check.matches("")) {//check if input is empty or not
                     Toast.makeText(MainActivity.this,"Please Enter a Number",Toast.LENGTH_SHORT).show();
-                }else{
+                }else{//if not empty passes into the system
                     _button.setVisibility(View.GONE);
                     _rating.setVisibility(View.VISIBLE);
                     _serviceTitle.setVisibility(View.VISIBLE);
                     _tipAmount.setVisibility(View.VISIBLE);
-                    _rating.setMax(10);
+                    _rating.setMax(10);//set seekbar size
 
-
+//added a text change listener for after the edit text is changed, without this the app will crash after text is changed
                     _serviceTitle.setText("Selected Rating: " + _rating.getProgress() + "/" + _rating.getMax());
                     _amount.addTextChangedListener(new TextWatcher() {
                         @Override
@@ -75,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                     });
 
-
+//seekbar listener will change the value of tip amount as the user slides through it based on the number rating.
                     _rating.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
 
 
@@ -86,12 +86,10 @@ public class MainActivity extends AppCompatActivity {
                             Toast T = Toast.makeText(MainActivity.this,"Please Enter a Number",Toast.LENGTH_SHORT);
                             _serviceTitle.setText("Selected Rating: " + progress + "/" + _rating.getMax());
                             if(temp.isEmpty()){
-
+//checks if after edit text the textbox is empty then shows error.
                                 T.show();
-
-
                             }
-                            else{
+                            else{//if not empty then continues to calculate the amount and displays it.
                                 T.cancel();
                                 double tempAmount = Double.parseDouble(temp);
                                 double tipAmount;
@@ -134,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onStopTrackingTouch(SeekBar seekBar) {
                             _serviceTitle.setText("Selected Rating: " + _rating.getProgress() + "/" + _rating.getMax());
-                        }
+                        }//shows rating after the user stops sliding.
                     });
                 }
             }
